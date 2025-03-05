@@ -6,6 +6,7 @@ const GlobalContext = createContext()
 const GlobalProvider = ({children}) => {  
     
     const [movies, setMovies] = useState([])
+    const [series, setSeries] = useState([]) 
 
     const [searchMovies, setSearchMovies] = useState("")
 
@@ -15,7 +16,8 @@ const GlobalProvider = ({children}) => {
 
     const handleSummit = (e) => {
         e.preventDefault()
-        getApiData()
+        getApiDataMovies()
+        getApiDataSeries()
         
     }
 
@@ -24,8 +26,8 @@ const GlobalProvider = ({children}) => {
     const token = import.meta.env.VITE_TMDB_API_TOKEN;
 
 
-
-    const getApiData = () => {
+    //Prima chiamata API - Film
+    const getApiDataMovies = () => {
         const options = {
             method: 'GET',
             url: `${url}movie?query=${searchMovies}&include_adult=false&language=it-IT&page=1`,
@@ -40,13 +42,30 @@ const GlobalProvider = ({children}) => {
             .catch(err => console.error(`Errore API ${err}`));
     }
     
+    //Seconda chiamata API - SerieTV
+    const getApiDataSeries = () => {
+        const options = {
+            method: 'GET',
+            url: `${url}tv?query=${searchMovies}&include_adult=false&language=it-IT&page=1`,
+            headers: {
+                accept: 'application/json',
+                Authorization: `Bearer ${token}`
+            }
+        };
+    
+        axios.request(options)
+            .then(res => setSeries(res.data.results))
+            .catch(err => console.error(`Errore API ${err}`));
+    }
 
 
     const value = {
         movies,
-        getApiData,
+        getApiDataMovies,
         handleSearch,
-        handleSummit
+        handleSummit,
+        series,
+        getApiDataSeries
 
     }   
     

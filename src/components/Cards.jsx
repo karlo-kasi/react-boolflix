@@ -4,7 +4,7 @@ import { useGlobalContext } from "../context/GlobalContext"
 
 const Cards = () => {
 
-    const { movies, getApiData } = useGlobalContext()
+    const { movies, getApiDataMovies, series, getApiDataSeries } = useGlobalContext()
     // const [movies, setMovies] = useState([])
 
 
@@ -16,8 +16,8 @@ const Cards = () => {
 
     useEffect(() => {
 
-        getApiData()
-
+        getApiDataMovies()
+        getApiDataSeries()
         // const options = {
         //     method: 'GET',
         //     url: `${url}movie?query=batman&include_adult=false&language=it-IT&page=1`,
@@ -32,31 +32,66 @@ const Cards = () => {
         //     .catch(err => console.error(`Errore API ${err}`));
     }, [])
 
-    console.log(movies)
 
     return (
-
-        <div className="container">
-            {
-                movies.map((movie) => {
-                    return (
-                        <div key={movie.id} className="card">
-                            <img className="card-img-top" />
-                            <div className="card-body">
-                                <h3 className="card-title">{movie.title}</h3>
-                                <h4 className="card-title">{movie.original_title}</h4>
-                                <h4 className="card-title">{movie.original_language}</h4>
-                                <h4 className="card-title">{movie.vote_average}</h4>
-                                <p>{movie.overview} </p>
-                            </div>
-                        </div>
-                    )
-                })
+        <>
 
 
-            }
+            <div className="container">
+                <div className="row">
+                    <h2>Film</h2>
+                    {
+                        movies.map((movie) => {
+                            return (
+                                <div className="col-3 my-3">
+                                    <div key={movie.id} className="card">
+                                        <img className="card-img-top" />
+                                        <div className="card-body">
+                                            <h3 className="card-title">{movie.title}</h3>
+                                            <h4 className="card-title">{movie.original_title}</h4>
+                                            <h4 className="card-title">{movie.original_language}</h4>
+                                            <h4 className="card-title">{movie.vote_average}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
 
-        </div>
+
+            </div>
+
+
+            <div className="container">
+                <div className="row">
+                    <h2>Serie TV</h2>
+
+                    {
+                        series.map((movie) => {
+                            return (
+                                <div className="col-3 my-3">
+                                    <div key={movie.id} className="card">
+                                        <img className="card-img-top" />
+                                        <div className="card-body">
+                                            <h3 className="card-title">{movie.name}</h3>
+                                            <h4 className="card-title">{movie.original_title}</h4>
+                                            <h4 className="card-title">{movie.original_language}</h4>
+                                            <h4 className="card-title">{movie.vote_average}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+                </div>
+
+
+            </div>
+
+        </>
+
 
 
 
