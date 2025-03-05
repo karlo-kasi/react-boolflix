@@ -1,6 +1,11 @@
+import Cards from "../components/Cards"
+
 const Main = () => {
     return (
-        <h2>Sono il Main</h2>
+        <>
+            <Cards />
+            <h2>Sono il Main</h2>
+        </>
     )
 }
 
