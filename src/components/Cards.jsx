@@ -32,84 +32,86 @@ const Cards = () => {
         //     .catch(err => console.error(`Errore API ${err}`));
     }, [])
 
-    
+
     function newStars(vote) {
-        let conversion =   Math.ceil(vote / 2)
-        
+        let conversion = Math.ceil(vote / 2)
+
         let fullStar = "★"
         let emptyStar = "☆"
 
         let result = fullStar.repeat(conversion)
-        let result2 = emptyStar.repeat(5-conversion)
+        let result2 = emptyStar.repeat(5 - conversion)
 
         let somma = result + result2
 
         return somma
-        
+
     }
 
     return (
         <>
 
+            <main className="bg-dark">
+                <div className="container">
+                    <div className="row">
+                        <h2 className="text-white mt-4 fs-1">Film</h2>
+                        {
+                            movies.map((movie) => {
 
-            <div className="container">
-                <div className="row">
-                    <h2>Film</h2>
-                    {
-                        movies.map((movie) => {
-                                                               
-                            return (
-                                <div className="col-4 my-3">
-                                    <div key={movie.id} className="card">
-                                        <img className="card-img-top" />
-                                        <div className="card-body">
-                                            <img src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt={movie.title} />
-                                            <h3 className="card-title">{movie.title}</h3>
-                                            <h4 className="card-title">{movie.original_title}</h4>
-                                            <h4 className="card-title">{movie.original_language}</h4>
-                                            <h4 className="card-title">{newStars(movie.vote_average)}</h4>
+                                return (
+                                    <div className="col-3 h-100 my-3">
+                                        <div className="locandine">
+                                            <div key={movie.id} className="">
+                                                <img className="sfondo" src={`https://image.tmdb.org/t/p/w342/${movie.poster_path}`} alt={movie.title} />
+                                                <div className="info">
+                                                    <h3>{movie.title}</h3>
+                                                    <h4>{movie.original_title}</h4>
+                                                    <h4>{movie.original_language}</h4>
+                                                    <h4>{newStars(movie.vote_average)}</h4>
+                                                    <p>{movie.overview}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+                    </div>
                 </div>
+                <div className="container">
+                    <div className="row">
+                        <h2 className="text-white mt-4 fs-1">Serie TV</h2>
 
+                        {
+                            series.map((serie) => {
 
-            </div>
-
-
-            <div className="container">
-                <div className="row">
-                    <h2>Serie TV</h2>
-
-                    {
-                        series.map((serie) => {
-
-                            return (
-                                <div className="col-4 my-3">
-                                    <div key={series.id} className="card">
-                                        <img className="card-img-top" />
-                                        <div className="card-body">
-                                            <img src={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`} alt={serie.title} />
-                                            <h3 className="card-title">{serie.name}</h3>
-                                            <h4 className="card-title">{serie.original_title}</h4>
-                                            <h4 className="card-title">{serie.original_language}</h4>
-
-                                            <h4 className="card-title">{newStars(serie.vote_average)}</h4>
-
+                                return (
+                                    <div className="col-3 h-100 my-3">
+                                        <div className="locandine">
+                                            <div key={series.id} className="card">
+                                                <img className="sfondo" src={`https://image.tmdb.org/t/p/w342/${serie.poster_path}`} alt={serie.title} />
+                                                <div className="info">
+                                                    <h3>{serie.name}</h3>
+                                                    <h4>{serie.original_title}</h4>
+                                                    <h4>{serie.original_language}</h4>
+                                                    <h4>{newStars(serie.vote_average)}</h4>
+                                                    <p>{serie.overview}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                        })
-                    }
+                                )
+                            })
+                        }
+
+                    </div>
+
 
                 </div>
+            </main>
 
 
-            </div>
+
 
         </>
 

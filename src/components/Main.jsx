@@ -4,7 +4,6 @@ const Main = () => {
     return (
         <>
             <Cards />
-            <h2>Sono il Main</h2>
         </>
     )
 }

@@ -12,7 +12,6 @@ function App() {
       <GlobalProvider>
         <Header />
         <Main />
-        <h1>Hello world</h1>
       </GlobalProvider>
 
     </>
